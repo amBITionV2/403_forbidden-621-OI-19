@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Heading */
+.para {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Container for hospital cards */
+.hospitalContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-top:100px;
+}
+
+/* Hospital card */
+.hospitalCard {
+  background: #ffffff;
+  border-radius: 18px;
+  width: 280px;
+  padding: 20px 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hospitalCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  border-color: #06b6d4;
+}
+
+/* Hospital name */
+.hospitalCard h3 {
+  font-size: 1.2rem;
+  color: #111827;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+/* Info text */
+.hospitalCard p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.hospitalCard strong {
+  color: #0f766e;
+}
+
+/* Distance */
+.distance {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #06b6d4;
+  text-align: right;
+}
+
+/* Back button */
+.backButton {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+  color: #06b6d4;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .hospitalCard {
+    width: 90%;
+    padding: 18px;
+  }
+
+  .para {
+    font-size: 1.5rem;
+  }
+
+  .outer {
+    padding-top: 80px;
+  }
+}

@@ -1,0 +1,141 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #ffffff,#ffffff);
+  font-family: "Segoe UI", sans-serif;
+  padding: 2rem;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #475569;
+  margin-top: 0.5rem;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.heroLeft {
+  flex: 1;
+  max-width: 600px;
+}
+
+.heroLeft h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1e293b;
+  margin-left:60px;
+}
+
+.heroLeft p {
+  font-size: 1.1rem;
+  color: #475569;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+    margin-left:60px;
+}
+
+.heroRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.heroImg {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgb(255, 255, 255);
+}
+
+/* Button group under text */
+.buttonGroup {
+  display: flex;
+  gap: 1.5rem;
+  margin-left:50px;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 260px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 2rem;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e293b;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #475569;
+
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .heroLeft {
+    max-width: 100%;
+  }
+
+  .buttonGroup {
+    justify-content: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}

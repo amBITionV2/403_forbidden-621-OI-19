@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom right, #f9fafb, #eef2ff);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+/* Back Button */
+.backButton {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.backButton:hover {
+  color: #111827;
+}
+
+/* Layout */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+/* Map */
+.mapWrapper {
+  flex: 1.2;
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.mapContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Card */
+.detailsCard {
+  flex: 0.8;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 450px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.detailsCard h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 15px;
+}
+
+/* Info groups */
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+  padding: 10px 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+/* Button */
+.mapButton {
+  display: inline-block;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.mapButton:hover {
+  background: linear-gradient(90deg, #1d4ed8, #2563eb);
+  transform: translateY(-2px);
+}
+
+/* Error text */
+.error {
+  text-align: center;
+  color: #b28a8a;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
+/* Static dotted line */
+.animatedLine {
+  stroke: black;
+  stroke-dasharray: 6 6;
+  stroke-width: 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mapWrapper {
+    width: 100%;
+    height: 400px;
+  }
+  .detailsCard {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mapWrapper {
+    height: 350px;
+  }
+  .detailsCard {
+    padding: 20px;
+  }
+  .backButton {
+    top: 15px;
+    left: 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .mapWrapper {
+    width: 100%;
+    height: 320px;
+  }
+  .detailsCard {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 347px) {
+  .mapWrapper {
+    height: 280px;
+  }
+  .detailsCard {
+    padding: 15px;
+  }
+}

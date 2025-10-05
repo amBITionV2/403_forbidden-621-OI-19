@@ -1,0 +1,177 @@
+const mongoose = require("mongoose");
+const Hospital = require("./models/Hospital");
+
+mongoose.connect("mongodb://localhost:27017/ambulancelogs")
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.log(err));
+
+const hospitals = [
+  // Existing
+  {
+    name: "Bangalore Heart Center",
+    address: "Near Majestic, Bangalore",
+    contactNumber: "9876543210",
+    location: { type: "Point", coordinates: [77.5946, 12.9716] },
+    specialties: ["cardiology", "emergency"],
+    equipment: [{ name: "defibrillator" }, { name: "ventilator" }],
+    tags: ["cardiac arrest", "heart attack", "defibrillator"],
+    capacity: { totalBeds: 120, icuBeds: 20 },
+    availableBeds: { total: 15, icu: 5 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "NeuroPlus Hospital",
+    address: "Indiranagar, Bangalore",
+    contactNumber: "9123456780",
+    location: { type: "Point", coordinates: [77.6406, 12.9719] },
+    specialties: ["neurology", "trauma"],
+    equipment: [{ name: "ct_scan" }, { name: "icu" }],
+    tags: ["stroke", "head injury", "seizure"],
+    capacity: { totalBeds: 100, icuBeds: 10 },
+    availableBeds: { total: 10, icu: 2 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "OrthoCare Clinic",
+    address: "Jayanagar, Bangalore",
+    contactNumber: "9988776655",
+    location: { type: "Point", coordinates: [77.5940, 12.9352] },
+    specialties: ["orthopedic"],
+    equipment: [{ name: "xray" }, { name: "orthopedic tools" }],
+    tags: ["fracture", "joint pain", "bone injury"],
+    capacity: { totalBeds: 80, icuBeds: 5 },
+    availableBeds: { total: 20, icu: 1 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "City Emergency Hospital",
+    address: "Koramangala, Bangalore",
+    contactNumber: "9112233445",
+    location: { type: "Point", coordinates: [77.6413, 12.9350] },
+    specialties: ["emergency", "trauma"],
+    equipment: [{ name: "ventilator" }, { name: "icu" }],
+    tags: ["accident", "emergency", "trauma"],
+    capacity: { totalBeds: 150, icuBeds: 25 },
+    availableBeds: { total: 12, icu: 4 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "Bangalore General Hospital",
+    address: "Whitefield, Bangalore",
+    contactNumber: "9001122334",
+    location: { type: "Point", coordinates: [77.7500, 12.9690] },
+    specialties: ["general", "emergency"],
+    equipment: [{ name: "xray" }, { name: "ct_scan" }],
+    tags: ["general illness", "fever", "injury"],
+    capacity: { totalBeds: 200, icuBeds: 30 },
+    availableBeds: { total: 50, icu: 10 },
+    isEmergencyReady: true,
+  },
+
+  // 👇 New ones (within 5km of BIT)
+  {
+    name: "KR Market Medical Center",
+    address: "KR Market, Bangalore",
+    contactNumber: "9012345678",
+    location: { type: "Point", coordinates: [77.5780, 12.9610] },
+    specialties: ["general", "emergency"],
+    equipment: [{ name: "xray" }, { name: "ventilator" }],
+    tags: ["fever", "accident", "injury"],
+    capacity: { totalBeds: 100, icuBeds: 10 },
+    availableBeds: { total: 20, icu: 3 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "Lalbagh Health Clinic",
+    address: "Lalbagh Road, Bangalore",
+    contactNumber: "9876501234",
+    location: { type: "Point", coordinates: [77.5860, 12.9505] },
+    specialties: ["pediatrics", "general"],
+    equipment: [{ name: "xray" }],
+    tags: ["child", "general checkup", "pediatrics"],
+    capacity: { totalBeds: 50, icuBeds: 5 },
+    availableBeds: { total: 15, icu: 2 },
+    isEmergencyReady: false,
+  },
+  {
+    name: "Basavanagudi Orthopedic Care",
+    address: "DVG Road, Basavanagudi",
+    contactNumber: "9887766554",
+    location: { type: "Point", coordinates: [77.5685, 12.9408] },
+    specialties: ["orthopedic"],
+    equipment: [{ name: "xray" }, { name: "orthopedic tools" }],
+    tags: ["fracture", "sprain"],
+    capacity: { totalBeds: 70, icuBeds: 4 },
+    availableBeds: { total: 10, icu: 1 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "VV Puram Neuro Center",
+    address: "VV Puram Circle, Bangalore",
+    contactNumber: "9811223344",
+    location: { type: "Point", coordinates: [77.5725, 12.9485] },
+    specialties: ["neurology"],
+    equipment: [{ name: "ct_scan" }],
+    tags: ["headache", "stroke"],
+    capacity: { totalBeds: 60, icuBeds: 5 },
+    availableBeds: { total: 8, icu: 2 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "BIT Health Support Unit",
+    address: "Bangalore Institute of Technology Campus",
+    contactNumber: "9999999999",
+    location: { type: "Point", coordinates: [77.5735, 12.9540] },
+    specialties: ["emergency", "general"],
+    equipment: [{ name: "first_aid" }, { name: "ambulance" }],
+    tags: ["college", "minor injuries"],
+    capacity: { totalBeds: 10, icuBeds: 1 },
+    availableBeds: { total: 5, icu: 0 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "JC Road MultiSpeciality Hospital",
+    address: "JC Road, Bangalore",
+    contactNumber: "9822334455",
+    location: { type: "Point", coordinates: [77.5802, 12.9562] },
+    specialties: ["cardiology", "general"],
+    equipment: [{ name: "defibrillator" }, { name: "ventilator" }],
+    tags: ["heart", "fever", "checkup"],
+    capacity: { totalBeds: 150, icuBeds: 15 },
+    availableBeds: { total: 25, icu: 4 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "South End Circle Care Hospital",
+    address: "Basavanagudi South End Circle, Bangalore",
+    contactNumber: "9898989898",
+    location: { type: "Point", coordinates: [77.5710, 12.9285] },
+    specialties: ["general", "orthopedic", "emergency"],
+    equipment: [{ name: "xray" }, { name: "ventilator" }],
+    tags: ["injury", "accident"],
+    capacity: { totalBeds: 120, icuBeds: 10 },
+    availableBeds: { total: 18, icu: 3 },
+    isEmergencyReady: true,
+  },
+  {
+    name: "Lalbagh Neuro & Trauma Center",
+    address: "Lalbagh West Gate, Bangalore",
+    contactNumber: "9876543200",
+    location: { type: "Point", coordinates: [77.5842, 12.9470] },
+    specialties: ["neurology", "trauma"],
+    equipment: [{ name: "ct_scan" }, { name: "icu" }],
+    tags: ["trauma", "stroke", "head injury"],
+    capacity: { totalBeds: 80, icuBeds: 8 },
+    availableBeds: { total: 12, icu: 3 },
+    isEmergencyReady: true,
+  },
+];
+
+async function seedHospitals() {
+  await Hospital.deleteMany({});
+  await Hospital.insertMany(hospitals);
+  console.log("✅ Hospitals added successfully (including BIT & nearby areas)");
+  mongoose.connection.close();
+}
+
+seedHospitals();
